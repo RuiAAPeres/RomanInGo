@@ -46,30 +46,5 @@ func ConvertNumber(inputNumber int) string {
 
 	fmt.Println(x)
 
-	// for i := 1; i < 7; i++ {
-
-	// 	var x int = (7 - i) / 2
-	// 	fmt.Println(x)
-	// }
-
-	// if number == 9 {
-	// 	return "IX"
-	// }
-
-	// if number >= 5 {
-	// 	buffer.WriteString("V")
-	// 	number -= 5
-	// }
-
-	// if number == 4 {
-	// 	return "IV"
-	// }
-
-	// for i := 0; i < number; i++ {
-	// 	buffer.WriteString("I")
-	// }
-
-	// return buffer.String()
-
 	return x
 }
