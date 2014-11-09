@@ -2,30 +2,45 @@ package roman
 
 import (
 	"bytes"
-	"fmt"
 	"math"
 	"strings"
 )
 
-func convertedNumberWithPossibleRepetition(array []string, inputNumber int) string {
+func fixRepetition(ls []string, s string) string {
+	for i, l := range ls {
+		if i != 0 && i%2 == 0 {
+
+			old := strings.Join([]string{ls[i-1], l, l, l, l}, "")
+			new := strings.Join([]string{l, ls[i-2]}, "")
+			s = strings.Replace(s, old, new, -1)
+
+			old1 := strings.Join([]string{l, l, l, l}, "")
+			new1 := strings.Join([]string{l, ls[i-1]}, "")
+			s = strings.Replace(s, old1, new1, -1)
+		}
+	}
+
+	return s
+}
+
+func convertedNumberWithRepetition(ls []string, n int) string {
 	var buffer bytes.Buffer
 
-	for index, romanLetter := range array {
+	for i, l := range ls {
 		var decimalValue float64
 
-		// There is no ternary operator in GO
-		if index%2 == 0 {
+		if i%2 == 0 {
 			decimalValue = 1
 		} else {
 			decimalValue = 5
 		}
 
-		value := int((decimalValue) * math.Pow10((len(array)-(index+1))/2)) // This will make for example M becomes 1000; D becomes 500; C becomes 100 etc.
-		fmt.Println(value)
+		// This will make for example M becomes 1000; D becomes 500; C becomes 100 etc.
+		value := int((decimalValue) * math.Pow10((len(ls)-(i+1))/2))
 
-		for inputNumber >= value {
-			buffer.WriteString(romanLetter)
-			inputNumber -= value
+		for n >= value {
+			buffer.WriteString(l)
+			n -= value
 		}
 	}
 
@@ -33,22 +48,9 @@ func convertedNumberWithPossibleRepetition(array []string, inputNumber int) stri
 }
 
 func ConvertNumber(n int) string {
-	letters := []string{"M", "D", "C", "L", "X", "V", "I"}
-	s := convertedNumberWithPossibleRepetition(letters, n)
-
-	for index, letter := range letters {
-		if index != 0 && index%2 == 0 {
-			y := letters[index]
-			fmt.Println("weeee")
-			fmt.Println(y)
-
-			old := strings.Join([]string{letter, letter, letter, letter}, "")
-			new := strings.Join([]string{letter, letters[index-1]}, "")
-			s = strings.Replace(s, old, new, -1)
-		}
-	}
-
-	fmt.Println("weee")
+	ls := []string{"M", "D", "C", "L", "X", "V", "I"}
+	s := convertedNumberWithRepetition(ls, n)
+	s = fixRepetition(ls, s)
 
 	return s
 }
