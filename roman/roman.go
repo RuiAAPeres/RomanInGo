@@ -47,7 +47,7 @@ func convertedNumberWithRepetition(ls []string, n int) string {
 	return buffer.String()
 }
 
-func ConvertNumber(n int) string {
+func ConvertToRoman(n int) string {
 	ls := []string{"M", "D", "C", "L", "X", "V", "I"}
 	s := convertedNumberWithRepetition(ls, n)
 	s = fixRepetition(ls, s)
