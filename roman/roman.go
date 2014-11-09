@@ -35,7 +35,7 @@ func convertedNumberWithRepetition(ls []string, n int) string {
 			decimalValue = 5
 		}
 
-		// This will make for example M becomes 1000; D becomes 500; C becomes 100 etc.
+		// This will calculate the corresponding value of each roman letter: M becomes 1000; D becomes 500; C becomes 100, etc.
 		value := int((decimalValue) * math.Pow10((len(ls)-(i+1))/2))
 
 		for n >= value {
