@@ -32,19 +32,23 @@ func convertedNumberWithPossibleRepetition(array []string, inputNumber int) stri
 	return buffer.String()
 }
 
-func ConvertNumber(inputNumber int) string {
+func ConvertNumber(n int) string {
+	letters := []string{"M", "D", "C", "L", "X", "V", "I"}
+	s := convertedNumberWithPossibleRepetition(letters, n)
 
-	array := []string{"M", "D", "C", "L", "X", "V", "I"}
-
-	x := convertedNumberWithPossibleRepetition(array, inputNumber)
-
-	for index, romanLetter := range array {
+	for index, letter := range letters {
 		if index != 0 && index%2 == 0 {
+			y := letters[index]
+			fmt.Println("weeee")
+			fmt.Println(y)
 
+			old := strings.Join([]string{letter, letter, letter, letter}, "")
+			new := strings.Join([]string{letter, letters[index-1]}, "")
+			s = strings.Replace(s, old, new, -1)
 		}
 	}
 
-	fmt.Println(x)
+	fmt.Println("weee")
 
-	return x
+	return s
 }
